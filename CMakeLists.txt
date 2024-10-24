@@ -8,27 +8,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(SharedDynamicLib SHARED
     Libs/SharedLib/IVechicle.h
     Libs/SharedLib/IVechicle.cpp
-    Libs/SharedLib/Camel.h
-    Libs/SharedLib/Camel.cpp
-    Libs/SharedLib/CamelSpeed.h
-    Libs/SharedLib/CamelSpeed.cpp
-    Libs/SharedLib/Centaur.h
-    Libs/SharedLib/Centaur.cpp
-    Libs/SharedLib/AllTerrainBoots.h
-    Libs/SharedLib/AllTerrainBoots.cpp
-    Libs/SharedLib/FlyingCarpet.h
-    Libs/SharedLib/FlyingCarpet.cpp
-    Libs/SharedLib/Eagle.h
-    Libs/SharedLib/Eagle.cpp
-    Libs/SharedLib/Broom.h
-    Libs/SharedLib/Broom.cpp
+    Libs/SharedLib/VehicleType.h
+    Libs/SharedLib/VehicleGround.h
+    Libs/SharedLib/VehicleGround.cpp
+    Libs/SharedLib/VehicleAir.h
+    Libs/SharedLib/VehicleAir.cpp
+    Libs/SharedLib/Ground/Camel.h
+    Libs/SharedLib/Ground/Camel.cpp
+    Libs/SharedLib/Ground/CamelSpeed.h
+    Libs/SharedLib/Ground/CamelSpeed.cpp
+    Libs/SharedLib/Ground/Centaur.h
+    Libs/SharedLib/Ground/Centaur.cpp
+    Libs/SharedLib/Ground/AllTerrainBoots.h
+    Libs/SharedLib/Ground/AllTerrainBoots.cpp
+    Libs/SharedLib/Air/FlyingCarpet.h
+    Libs/SharedLib/Air/FlyingCarpet.cpp
+    Libs/SharedLib/Air/Eagle.h
+    Libs/SharedLib/Air/Eagle.cpp
+    Libs/SharedLib/Air/Broom.h
+    Libs/SharedLib/Air/Broom.cpp
     Libs/SharedLib/Race.h
     Libs/SharedLib/Race.cpp
 )
 
 add_executable(RacingSimulator
     main.cpp
-    VehicleType.h
     RaceType.h
 )
 

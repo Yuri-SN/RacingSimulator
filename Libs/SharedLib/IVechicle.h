@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../VehicleType.h"
+#include "VehicleType.h"
 
 class IVechicle {
 public:
