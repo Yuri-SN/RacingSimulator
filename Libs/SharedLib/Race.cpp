@@ -55,6 +55,24 @@ std::string Race::getRaceParams() {
     return result;
 }
 
+std::string Race::getRegisteredVehicles() {
+    std::string result{};
+
+    if (!m_vehicles.empty()) {
+        result = "Зарегистрированные транспортные средства: ";
+
+        for(auto vehicle : m_vehicles) {
+            result += vehicle->getName();
+
+            if (vehicle != m_vehicles.back()) {
+                result += ", ";
+            }
+        }
+    }
+
+    return result;
+}
+
 void Race::registerVehicle(IVehicle *vehicle) { m_vehicles.push_back(vehicle); }
 
 void Race::startRace() {

@@ -1,3 +1,5 @@
+#include "Libs/SharedLib/Air/FlyingCarpet.h"
+#include "Libs/SharedLib/Ground/Camel.h"
 #include "Libs/SharedLib/Race.h"
 
 #include <iostream>
@@ -43,17 +45,13 @@ int main() {
         } while (!raceDistanceCorrect);
 
         std::cout << race->getRaceParams() << std::endl;
+
+        race->registerVehicle(new Camel());
+        race->registerVehicle(new FlyingCarpet());
+
+        std::cout << race->getRegisteredVehicles() << std::endl;
+
         break;
-
-        // Race race(distance);
-
-        // if (raceType == 1) {
-        //     race.registerVehicle(new Camel());
-        //     // Можно добавить другие наземные ТС
-        // } else if (raceType == 2) {
-        //     race.registerVehicle(new FlyingCarpet());
-        //     // Можно добавить другие воздушные ТС
-        // }
 
         // race.startRace();
 

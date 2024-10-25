@@ -17,6 +17,7 @@ public:
     bool setRaceDistance(int distance);
 
     std::string getRaceParams();
+    std::string getRegisteredVehicles();
 
     void registerVehicle(IVehicle *vehicle);
 
