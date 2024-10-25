@@ -1,5 +1,3 @@
-#include "Libs/SharedLib/Air/FlyingCarpet.h"
-#include "Libs/SharedLib/Ground/Camel.h"
 #include "Libs/SharedLib/Race.h"
 
 #include <iostream>
@@ -17,7 +15,9 @@ int main() {
     int raceType{};
     int raceDistance{};
     int registrationMenuitem{};
+    int anotherRaceMenuitem{};
 
+    bool exitApp{};
     bool raceTypeCorrect{};
     bool raceDistanceCorrect{};
     bool raceRegistrationComplete{};
@@ -26,7 +26,7 @@ int main() {
 
     std::cout << "Добро пожаловать в гоночный симулятор!" << std::endl;
 
-    while (true) {
+    do {
         race->clean();
 
         std::cout << "1. Гонка для наземного транспорта" << std::endl;
@@ -117,8 +117,30 @@ int main() {
             }
         } while (!raceRegistrationComplete);
 
-        break;
-    }
+        race->startRace();
+
+        std::cout << "Результаты гонки:" << std::endl;
+
+        // В цикле выводим результат по каждому ТС
+
+        bool anotherRaceMenuitemCorrect{};
+
+        do {
+            std::cout << "1. Провести ещё одну гонку" << std::endl;
+            std::cout << "2. Выйти" << std::endl;
+            std::cin >> anotherRaceMenuitem;
+
+            anotherRaceMenuitemCorrect = anotherRaceMenuitem == 1 || anotherRaceMenuitem == 2;
+
+            if (!anotherRaceMenuitemCorrect) {
+                std::cout << "Неверное значение" << std::endl;
+            }
+        } while(!anotherRaceMenuitemCorrect);
+
+        if (anotherRaceMenuitem == 2) {
+            exitApp = true;
+        }
+    } while(!exitApp);
 
     delete race;
 
