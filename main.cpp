@@ -1,22 +1,70 @@
-#include "RaceType.h"
+#include "Libs/SharedLib/Race.h"
+
 #include <iostream>
 
 int main() {
-    int raceTypeNum{};
-    RaceType raceTypeEnum{};
+    Race *race = new Race();
+
+    int raceType{};
+    int raceDistance{};
+
+    bool raceTypeCorrect{};
+    bool raceDistanceCorrect{};
 
     std::cout << "Добро пожаловать в гоночный симулятор!" << std::endl;
 
     while (true) {
+        race->clean();
+
         std::cout << "1. Гонка для наземного транспорта" << std::endl;
         std::cout << "2. Гонка для воздушного транспорта" << std::endl;
         std::cout << "3. Гонка для наземного и воздушного транспорта" << std::endl;
 
-        std::cout << "Выберите тип гонки: ";
-        std::cin >> raceTypeNum;
+        do {
+            std::cout << "Выберите тип гонки: ";
+            std::cin >> raceType;
 
-        raceTypeEnum = static_cast<RaceType>(raceTypeNum);
+            raceTypeCorrect = race->setRaceType(raceType);
+
+            if (!raceTypeCorrect) {
+                std::cout << "Неверный тип гонки" << std::endl;
+            }
+        } while (!raceTypeCorrect);
+
+        do {
+            std::cout << "Укажите длину дистанции (должна быть положительна): ";
+            std::cin >> raceDistance;
+
+            raceDistanceCorrect = race->setRaceDistance(raceDistance);
+
+            if (!raceDistanceCorrect) {
+                std::cout << "Неверное значение" << std::endl;
+            }
+        } while (!raceDistanceCorrect);
+
+        std::cout << race->getRaceParams() << std::endl;
+        break;
+
+        // Race race(distance);
+
+        // if (raceType == 1) {
+        //     race.registerVehicle(new Camel());
+        //     // Можно добавить другие наземные ТС
+        // } else if (raceType == 2) {
+        //     race.registerVehicle(new FlyingCarpet());
+        //     // Можно добавить другие воздушные ТС
+        // }
+
+        // race.startRace();
+
+        // char choice;
+        // std::cout << "Хотите провести ещё одну гонку? (y/n): ";
+        // std::cin >> choice;
+        // if (choice != 'y')
+        //     break;
     }
+
+    delete race;
 
     return 0;
 }
