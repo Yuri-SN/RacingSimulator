@@ -88,7 +88,7 @@ int main() {
 
             if (registrationMenuitem == 1) {
                 raceAddVehicleComplete = false;
-                auto availableVahicles = race->getAvailableVahicles();
+                std::vector<std::string> availableVahicles = race->getAvailableVahicles();
                 int vehicleMenuitem{};
 
                 do {
@@ -99,7 +99,7 @@ int main() {
                     }
 
                     for (int i{}; i < availableVahicles.size(); ++i) {
-                        std::cout << i+1 << ". " << availableVahicles.at(i)->getName() << std::endl;
+                        std::cout << i+1 << ". " << availableVahicles.at(i) << std::endl;
                     }
                     std::cout << "0. Закончить регистрацию" << std::endl;
 

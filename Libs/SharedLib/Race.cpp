@@ -49,8 +49,14 @@ bool Race::setRaceDistance(int distance) {
 
 int Race::getVehiclesCount() { return m_registeredVehicles.size(); }
 
-std::vector<IVehicle *> Race::getAvailableVahicles() {
-    return m_availableVehicles;
+std::vector<std::string> Race::getAvailableVahicles() {
+    std::vector<std::string> result{};
+
+    for (auto const vehicle : m_availableVehicles) {
+        result.push_back(vehicle->getName());
+    }
+
+    return result;
 }
 
 std::string Race::getRaceParams() {

@@ -18,7 +18,7 @@ public:
 
     int getVehiclesCount();
 
-    std::vector<IVehicle *> getAvailableVahicles();
+    std::vector<std::string> getAvailableVahicles();
 
     std::string getRaceParams();
     std::string getRegisteredVehicles();
