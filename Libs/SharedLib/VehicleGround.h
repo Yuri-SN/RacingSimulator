@@ -1,9 +1,15 @@
 #pragma once
 
-#include "IVechicle.h"
+#include "IVehicle.h"
 
-class VehicleGround : public IVechicle
-{
+class VehicleGround : public IVehicle {
 public:
-    VehicleGround();
+    VehicleGround(double speed, double movingTime, double restingTime);
+
+    double calculateRestTime(double distance) const;
+
+protected:
+    double m_speed{};
+    double m_movingTime{};
+    double m_restingTime{};
 };

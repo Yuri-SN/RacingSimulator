@@ -1,18 +1,16 @@
 #pragma once
 
+#include "IVehicle.h"
 #include <vector>
-
-#include "../../RaceType.h"
-#include "IVechicle.h"
 
 class Race {
 public:
-    Race(RaceType type);
+    Race(double distance);
 
-    std::vector<IVechicle> getVehicles();
-    bool addVehicle();
+    void registerVehicle(IVehicle *vehicle);
+    void startRace();
 
 private:
-    RaceType m_type{};
-    std::vector<IVechicle> m_vehicles{};
+    std::vector<IVehicle *> m_vehicles{};
+    double m_distance{};
 };

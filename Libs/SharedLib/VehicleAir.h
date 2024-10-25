@@ -1,9 +1,14 @@
 #pragma once
 
-#include "IVechicle.h"
+#include "IVehicle.h"
 
-class VehicleAir : public IVechicle
-{
+class VehicleAir : public IVehicle {
+
 public:
-    VehicleAir();
+    VehicleAir(double speed);
+
+    double calculateDistance(double distance) const;
+
+protected:
+    double m_speed{};
 };

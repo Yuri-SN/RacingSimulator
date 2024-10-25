@@ -6,9 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(SharedDynamicLib SHARED
-    Libs/SharedLib/IVechicle.h
-    Libs/SharedLib/IVechicle.cpp
-    Libs/SharedLib/VehicleType.h
+    Libs/SharedLib/IVehicle.h
     Libs/SharedLib/VehicleGround.h
     Libs/SharedLib/VehicleGround.cpp
     Libs/SharedLib/VehicleAir.h

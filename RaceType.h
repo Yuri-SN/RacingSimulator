@@ -1,7 +1,7 @@
 #pragma once
 
 enum class RaceType {
-    GROUND,
+    GROUND = 1,
     AIR,
     GROUND_AND_AIR
 };

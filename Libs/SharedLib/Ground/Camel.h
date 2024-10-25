@@ -2,7 +2,11 @@
 
 #include "../VehicleGround.h"
 
-class VechicleCamel : public VehicleGround {
+class Camel : public VehicleGround {
 public:
-    VechicleCamel();
+    Camel();
+
+    double calculateTime(double distance) const override;
+
+    std::string getName() const override;
 };
