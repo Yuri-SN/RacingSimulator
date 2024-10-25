@@ -16,10 +16,14 @@ public:
     bool setRaceType(int type);
     bool setRaceDistance(int distance);
 
+    int getVehiclesCount();
+
+    std::vector<IVehicle *> getAvailableVahicles();
+
     std::string getRaceParams();
     std::string getRegisteredVehicles();
 
-    void registerVehicle(IVehicle *vehicle);
+    std::string registerVehicle(int vehicleIndex);
 
     void startRace();
 
@@ -27,7 +31,8 @@ private:
     std::set<RaceType> const m_validRaceTypes{RaceType::GROUND, RaceType::AIR,
                                               RaceType::GROUND_AND_AIR};
 
-    std::vector<IVehicle *> m_vehicles{};
+    std::vector<IVehicle *> m_availableVehicles{};
+    std::vector<IVehicle *> m_registeredVehicles{};
 
     RaceType m_raceType{};
     int m_raceDistance{};

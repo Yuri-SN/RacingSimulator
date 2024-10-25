@@ -1,11 +1,26 @@
 #include "Race.h"
+#include "Air/Broom.h"
+#include "Air/Eagle.h"
+#include "Air/FlyingCarpet.h"
+#include "Ground/AllTerrainBoots.h"
+#include "Ground/Camel.h"
+#include "Ground/CamelSpeed.h"
+#include "Ground/Centaur.h"
 #include <algorithm>
 #include <iostream>
 
-Race::Race() {}
+Race::Race() {
+    m_availableVehicles.push_back(new AllTerrainBoots());
+    m_availableVehicles.push_back(new Broom());
+    m_availableVehicles.push_back(new Camel());
+    m_availableVehicles.push_back(new Centaur());
+    m_availableVehicles.push_back(new Eagle());
+    m_availableVehicles.push_back(new CamelSpeed());
+    m_availableVehicles.push_back(new FlyingCarpet());
+}
 
 void Race::clean() {
-    m_vehicles = {};
+    m_registeredVehicles = {};
     m_raceType = {};
     m_raceDistance = 0;
 }
@@ -30,6 +45,12 @@ bool Race::setRaceDistance(int distance) {
     } else {
         return false;
     }
+}
+
+int Race::getVehiclesCount() { return m_registeredVehicles.size(); }
+
+std::vector<IVehicle *> Race::getAvailableVahicles() {
+    return m_availableVehicles;
 }
 
 std::string Race::getRaceParams() {
@@ -58,13 +79,13 @@ std::string Race::getRaceParams() {
 std::string Race::getRegisteredVehicles() {
     std::string result{};
 
-    if (!m_vehicles.empty()) {
+    if (!m_registeredVehicles.empty()) {
         result = "Зарегистрированные транспортные средства: ";
 
-        for(auto vehicle : m_vehicles) {
+        for (auto vehicle : m_registeredVehicles) {
             result += vehicle->getName();
 
-            if (vehicle != m_vehicles.back()) {
+            if (vehicle != m_registeredVehicles.back()) {
                 result += ", ";
             }
         }
@@ -73,12 +94,26 @@ std::string Race::getRegisteredVehicles() {
     return result;
 }
 
-void Race::registerVehicle(IVehicle *vehicle) { m_vehicles.push_back(vehicle); }
+std::string Race::registerVehicle(int vehicleIndex) {
+    std::string result{};
+    IVehicle *selectedVehicle = m_availableVehicles.at(vehicleIndex);
+
+    auto it = std::find(m_registeredVehicles.begin(), m_registeredVehicles.end(), selectedVehicle);
+
+    if (it != m_registeredVehicles.end()) {
+        result += selectedVehicle->getName() + " уже зарегистрирован!";
+    } else {
+        result += selectedVehicle->getName() + " успешно зарегистрирован!";
+        m_registeredVehicles.push_back(selectedVehicle);
+    }
+
+    return result;
+}
 
 void Race::startRace() {
     std::vector<std::pair<std::string, double>> results;
 
-    for (auto *vehicle : m_vehicles) {
+    for (auto *vehicle : m_registeredVehicles) {
         double time = vehicle->calculateTime(m_raceDistance);
         results.push_back({vehicle->getName(), time});
     }
