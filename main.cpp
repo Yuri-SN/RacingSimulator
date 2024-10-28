@@ -103,7 +103,7 @@ int main() {
                     }
                     std::cout << "0. Закончить регистрацию" << std::endl;
 
-                    std::cout << "Выберите транспорт или 0 для окончания процесса регистрации: " << std::endl;
+                    std::cout << "Выберите транспорт или 0 для окончания процесса регистрации: ";
                     std::cin >> vehicleMenuitem;
 
                     if (vehicleMenuitem < 0 && vehicleMenuitem > availableVahicles.size()) {
@@ -117,11 +117,15 @@ int main() {
             }
         } while (!raceRegistrationComplete);
 
-        race->startRace();
+        auto raceResult = race->calculateResult();
 
         std::cout << "Результаты гонки:" << std::endl;
 
-        // В цикле выводим результат по каждому ТС
+        for (int i{0}; i < raceResult.size(); ++i) {
+            std::cout << i+1 << ". " << raceResult.at(i).name << ". Время: " << raceResult.at(i).time << std::endl;
+        }
+
+        std::cout << std::endl;
 
         bool anotherRaceMenuitemCorrect{};
 

@@ -128,30 +128,28 @@ std::string Race::registerVehicle(int vehicleIndex) {
     return result;
 }
 
-void Race::startRace() {
-    // std::vector<std::pair<std::string, double>> results;
+std::vector<VehicleResult> Race::calculateResult() {
+    std::vector<VehicleResult> results{};
 
-    // for (auto *vehicle : m_registeredVehicles) {
-    //     double time = vehicle->calculateTime(m_raceDistance);
-    //     results.push_back({vehicle->getName(), time});
-    // }
+    for (auto *vehicle : m_registeredVehicles) {
+        double time = vehicle->calculateTime(m_raceDistance);
+        results.push_back({vehicle->getName(), time});
+    }
 
-    // std::sort(results.begin(), results.end(),
-    //           [](const auto &a, const auto &b) { return a.second < b.second;
-    //           });
+    std::sort(results.begin(), results.end(),
+              [](const auto &a, const auto &b) { return a.time < b.time; });
 
-    // for (const auto &result : results) {
-    //     std::cout << result.first << ": " << result.second << " ч" <<
-    //     std::endl;
-    // }
+    return results;
 }
 
 bool Race::isVehicleTypeAceptable(IVehicle *vehicle) {
-    if (vehicle->isTypeAir() && (m_raceType == RaceType::AIR || m_raceType == RaceType::GROUND_AND_AIR)) {
+    if (vehicle->isTypeAir() &&
+        (m_raceType == RaceType::AIR || m_raceType == RaceType::GROUND_AND_AIR)) {
         return true;
     };
 
-    if (!vehicle->isTypeAir() && (m_raceType == RaceType::GROUND || m_raceType == RaceType::GROUND_AND_AIR)) {
+    if (!vehicle->isTypeAir() && (m_raceType == RaceType::GROUND ||
+                                  m_raceType == RaceType::GROUND_AND_AIR)) {
         return true;
     };
 

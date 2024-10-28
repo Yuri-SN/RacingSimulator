@@ -2,6 +2,7 @@
 
 #include "IVehicle.h"
 #include "RaceType.h"
+#include "VehicleResult.h"
 
 #include <vector>
 
@@ -24,7 +25,7 @@ public:
 
     std::string registerVehicle(int vehicleIndex);
 
-    void startRace();
+    std::vector<VehicleResult> calculateResult();
 
 private:
     bool isVehicleTypeAceptable(IVehicle *);
