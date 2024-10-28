@@ -7,7 +7,6 @@
 #include "Ground/CamelSpeed.h"
 #include "Ground/Centaur.h"
 #include <algorithm>
-#include <iostream>
 
 Race::Race() {
     m_availableVehicles.push_back(new AllTerrainBoots());
@@ -26,21 +25,27 @@ void Race::clean() {
 }
 
 bool Race::setRaceType(int type) {
+    bool result{};
     RaceType raceTypeEnum = static_cast<RaceType>(type);
 
-    if (m_validRaceTypes.find(raceTypeEnum) != m_validRaceTypes.end()) {
+    switch (raceTypeEnum) {
+    case RaceType::AIR:
+    case RaceType::GROUND:
+    case RaceType::GROUND_AND_AIR:
         m_raceType = raceTypeEnum;
-
-        return true;
-    } else {
-        return false;
+        result = true;
+        break;
+    default:
+        result = false;
+        break;
     }
+
+    return result;
 }
 
 bool Race::setRaceDistance(int distance) {
     if (distance > 0) {
         m_raceDistance = distance;
-
         return true;
     } else {
         return false;
@@ -102,15 +107,22 @@ std::string Race::getRegisteredVehicles() {
 
 std::string Race::registerVehicle(int vehicleIndex) {
     std::string result{};
+
     IVehicle *selectedVehicle = m_availableVehicles.at(vehicleIndex);
 
-    auto it = std::find(m_registeredVehicles.begin(), m_registeredVehicles.end(), selectedVehicle);
+    if (isVehicleTypeAceptable(selectedVehicle)) {
+        auto it = std::find(m_registeredVehicles.begin(),
+                            m_registeredVehicles.end(), selectedVehicle);
 
-    if (it != m_registeredVehicles.end()) {
-        result += selectedVehicle->getName() + " уже зарегистрирован!";
+        if (it != m_registeredVehicles.end()) {
+            result += selectedVehicle->getName() + " уже зарегистрирован!";
+        } else {
+            result += selectedVehicle->getName() + " успешно зарегистрирован!";
+            m_registeredVehicles.push_back(selectedVehicle);
+        }
     } else {
-        result += selectedVehicle->getName() + " успешно зарегистрирован!";
-        m_registeredVehicles.push_back(selectedVehicle);
+        result +=
+            "Попытка зарегистрировать неправильный тип транспортного средства!";
     }
 
     return result;
@@ -125,9 +137,23 @@ void Race::startRace() {
     // }
 
     // std::sort(results.begin(), results.end(),
-    //           [](const auto &a, const auto &b) { return a.second < b.second; });
+    //           [](const auto &a, const auto &b) { return a.second < b.second;
+    //           });
 
     // for (const auto &result : results) {
-    //     std::cout << result.first << ": " << result.second << " ч" << std::endl;
+    //     std::cout << result.first << ": " << result.second << " ч" <<
+    //     std::endl;
     // }
+}
+
+bool Race::isVehicleTypeAceptable(IVehicle *vehicle) {
+    if (vehicle->isTypeAir() && (m_raceType == RaceType::AIR || m_raceType == RaceType::GROUND_AND_AIR)) {
+        return true;
+    };
+
+    if (!vehicle->isTypeAir() && (m_raceType == RaceType::GROUND || m_raceType == RaceType::GROUND_AND_AIR)) {
+        return true;
+    };
+
+    return false;
 }

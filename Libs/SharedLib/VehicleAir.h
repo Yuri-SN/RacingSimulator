@@ -9,6 +9,8 @@ public:
 
     double calculateDistance(double distance) const;
 
+    bool isTypeAir() const override;
+
 protected:
     double m_speed{};
 };

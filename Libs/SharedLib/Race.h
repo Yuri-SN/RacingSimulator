@@ -3,7 +3,6 @@
 #include "IVehicle.h"
 #include "RaceType.h"
 
-#include <set>
 #include <vector>
 
 class Race {
@@ -28,8 +27,7 @@ public:
     void startRace();
 
 private:
-    std::set<RaceType> const m_validRaceTypes{RaceType::GROUND, RaceType::AIR,
-                                              RaceType::GROUND_AND_AIR};
+    bool isVehicleTypeAceptable(IVehicle *);
 
     std::vector<IVehicle *> m_availableVehicles{};
     std::vector<IVehicle *> m_registeredVehicles{};

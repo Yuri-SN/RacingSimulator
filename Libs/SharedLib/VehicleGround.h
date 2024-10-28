@@ -8,6 +8,8 @@ public:
 
     double calculateRestTime(double distance) const;
 
+    bool isTypeAir() const override;
+
 protected:
     double m_speed{};
     double m_movingTime{};

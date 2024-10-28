@@ -25,9 +25,9 @@ add_library(SharedDynamicLib SHARED
     Libs/SharedLib/Air/Eagle.cpp
     Libs/SharedLib/Air/Broom.h
     Libs/SharedLib/Air/Broom.cpp
-    Libs/SharedLib/RaceType.h
     Libs/SharedLib/Race.h
     Libs/SharedLib/Race.cpp
+    Libs/SharedLib/RaceType.h
 )
 
 add_executable(RacingSimulator

@@ -10,3 +10,7 @@ double VehicleGround::calculateRestTime(double distance) const {
 
     return rests * m_restingTime;
 }
+
+bool VehicleGround::isTypeAir() const {
+    return false;
+}
