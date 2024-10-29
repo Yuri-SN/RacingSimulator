@@ -6,7 +6,5 @@ class Camel : public VehicleGround {
 public:
     Camel();
 
-    double calculateTime(double distance) const override;
-
-    std::string getName() const override;
+    void setRestDuration(int stopNumber) override;
 };

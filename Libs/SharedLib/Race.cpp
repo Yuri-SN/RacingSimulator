@@ -108,7 +108,7 @@ std::string Race::getRegisteredVehicles() {
 std::string Race::registerVehicle(int vehicleIndex) {
     std::string result{};
 
-    IVehicle *selectedVehicle = m_availableVehicles.at(vehicleIndex);
+    Vehicle *selectedVehicle = m_availableVehicles.at(vehicleIndex);
 
     if (isVehicleTypeAceptable(selectedVehicle)) {
         auto it = std::find(m_registeredVehicles.begin(),
@@ -132,8 +132,24 @@ std::vector<VehicleResult> Race::calculateResult() {
     std::vector<VehicleResult> results{};
 
     for (auto *vehicle : m_registeredVehicles) {
-        double time = vehicle->calculateTime(m_raceDistance);
-        results.push_back({vehicle->getName(), time});
+        if (vehicle->isTypeAir()) {
+            // Расчёт времени для воздушного ТС
+            auto airVehicle = dynamic_cast<VehicleAir *>(vehicle);
+            double reducedDistance =
+                m_raceDistance * (1 - airVehicle->getDistanceReductionFactor(m_raceDistance));
+            double totalTime = reducedDistance / airVehicle->getSpeed();
+            results.push_back({airVehicle->getName(), totalTime});
+        } else {
+            // Расчёт времени для наземного ТС
+            auto groundVehicle = dynamic_cast<VehicleGround *>(vehicle);
+            double totalTime = m_raceDistance / groundVehicle->getSpeed();
+            int breaks =
+                static_cast<int>(totalTime / groundVehicle->getMovementTime());
+            for (int i{0}; i < breaks; ++i) {
+                totalTime += groundVehicle->getRestDuration();
+            }
+            results.push_back({groundVehicle->getName(), totalTime});
+        }
     }
 
     std::sort(results.begin(), results.end(),
@@ -142,7 +158,7 @@ std::vector<VehicleResult> Race::calculateResult() {
     return results;
 }
 
-bool Race::isVehicleTypeAceptable(IVehicle *vehicle) {
+bool Race::isVehicleTypeAceptable(Vehicle *vehicle) {
     if (vehicle->isTypeAir() &&
         (m_raceType == RaceType::AIR || m_raceType == RaceType::GROUND_AND_AIR)) {
         return true;

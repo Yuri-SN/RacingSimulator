@@ -1,17 +1,23 @@
 #pragma once
 
-#include "IVehicle.h"
+#include "Vehicle.h"
 
-class VehicleGround : public IVehicle {
+class VehicleGround : public Vehicle {
 public:
-    VehicleGround(double speed, double movingTime, double restingTime);
+    VehicleGround(const std::string &name, int speed, int movementTime,
+                  int restDuration);
 
-    double calculateRestTime(double distance) const;
+    virtual double getSpeed() const override;
+    virtual int getMovementTime() const;
+    virtual int getRestDuration() const;
+    virtual void setRestDuration(int duration);
 
     bool isTypeAir() const override;
 
 protected:
+    int m_movementTime{};
+    double m_restDuration{};
+
+private:
     double m_speed{};
-    double m_movingTime{};
-    double m_restingTime{};
 };

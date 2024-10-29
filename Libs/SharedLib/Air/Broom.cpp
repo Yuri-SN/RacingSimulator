@@ -1,7 +1,7 @@
 #include "Broom.h"
 
-Broom::Broom() : VehicleAir(0) {}
+Broom::Broom() : VehicleAir("Метла", 20, 0) {}
 
-double Broom::calculateTime(double distance) const { return 0; }
-
-std::string Broom::getName() const { return "Метла"; }
+double Broom::getDistanceReductionFactor(int raceDistance) const {
+    return (raceDistance / 1000) * 0.01;   // Коэффициент увеличивается на 1% за каждые 1000 единиц расстояния
+}

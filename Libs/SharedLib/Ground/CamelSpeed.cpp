@@ -1,7 +1,13 @@
 #include "CamelSpeed.h"
 
-CamelSpeed::CamelSpeed() : VehicleGround(0, 0, 0) {}
+CamelSpeed::CamelSpeed() : VehicleGround("Верблюд-быстроход", 40, 10, 5) {}
 
-double CamelSpeed::calculateTime(double distance) const { return 0; }
-
-std::string CamelSpeed::getName() const { return "Верблюд-быстроход"; }
+void CamelSpeed::setRestDuration(int stopNumber) {
+    if (stopNumber == 1) {
+        m_restDuration = 5;      // Первое время отдыха
+    } else if (stopNumber == 2) {
+        m_restDuration = 6.5;    // Второе время отдыха
+    } else {
+        m_restDuration = 8;      // Все последующие остановки
+    }
+}

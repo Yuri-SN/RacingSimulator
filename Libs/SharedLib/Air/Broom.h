@@ -6,7 +6,5 @@ class Broom : public VehicleAir {
 public:
     Broom();
 
-    double calculateTime(double distance) const override;
-
-    std::string getName() const override;
+    double getDistanceReductionFactor(int raceDistance) const override;
 };

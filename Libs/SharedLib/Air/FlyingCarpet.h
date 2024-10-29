@@ -6,7 +6,5 @@ class FlyingCarpet : public VehicleAir {
 public:
     FlyingCarpet();
 
-    double calculateTime(double distance) const override;
-
-    std::string getName() const override;
+    double getDistanceReductionFactor(int raceDistance) const override;
 };

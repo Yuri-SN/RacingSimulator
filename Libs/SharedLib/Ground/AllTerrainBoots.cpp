@@ -1,7 +1,12 @@
 #include "AllTerrainBoots.h"
 
-AllTerrainBoots::AllTerrainBoots() : VehicleGround(0, 0, 0) {}
+AllTerrainBoots::AllTerrainBoots()
+    : VehicleGround("Ботинки-вездеходы", 6, 60, 10) {}
 
-double AllTerrainBoots::calculateTime(double distance) const { return 0; }
-
-std::string AllTerrainBoots::getName() const { return "Ботинки-вездеходы"; }
+void AllTerrainBoots::setRestDuration(int stopNumber) {
+    if (stopNumber == 1) {
+        m_restDuration = 10;  // Первое время отдыха
+    } else {
+        m_restDuration = 5;   // Все последующие остановки
+    }
+}

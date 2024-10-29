@@ -1,16 +1,17 @@
 #include "VehicleGround.h"
 
-VehicleGround::VehicleGround(double speed, double movingTime,
-                             double restingTime)
-    : m_speed(speed), m_movingTime(movingTime), m_restingTime(restingTime) {}
+VehicleGround::VehicleGround(const std::string &name, int speed, int movingTime,
+                             int restDuration)
+    : m_speed(speed), m_movementTime(movingTime), m_restDuration(restDuration) {
 
-double VehicleGround::calculateRestTime(double distance) const {
-    double travelTime = distance / m_speed;
-    int rests = static_cast<int>(travelTime / m_movingTime);
-
-    return rests * m_restingTime;
+    m_name = name;
 }
 
-bool VehicleGround::isTypeAir() const {
-    return false;
-}
+double VehicleGround::getSpeed() const { return m_speed; }
+
+int VehicleGround::getMovementTime() const { return m_movementTime; }
+int VehicleGround::getRestDuration() const { return m_restDuration; }
+
+void VehicleGround::setRestDuration(int duration) { m_restDuration = duration; }
+
+bool VehicleGround::isTypeAir() const { return false; }

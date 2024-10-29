@@ -1,16 +1,20 @@
 #pragma once
 
-#include "IVehicle.h"
+#include "Vehicle.h"
 
-class VehicleAir : public IVehicle {
+class VehicleAir : public Vehicle {
 
 public:
-    VehicleAir(double speed);
+    VehicleAir(const std::string &name, double speed, double reductionFactor);
 
-    double calculateDistance(double distance) const;
+    virtual double getSpeed() const override;
+    virtual double getDistanceReductionFactor(int raceDistance) const;
 
     bool isTypeAir() const override;
 
 protected:
+    double m_distanceReductionFactor{};
+
+private:
     double m_speed{};
 };

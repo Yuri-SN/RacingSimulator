@@ -1,12 +1,11 @@
 #include "Camel.h"
 
-Camel::Camel() : VehicleGround(10, 30, 5) {}
+Camel::Camel() : VehicleGround("Верблюд", 10, 30, 5) {}
 
-double Camel::calculateTime(double distance) const {
-    double travelTime = distance / m_speed;
-    double restTime = calculateRestTime(distance);
-
-    return travelTime + restTime;
+void Camel::setRestDuration(int stopNumber) {
+    if (stopNumber == 1) {
+        m_restDuration = 5;
+    } else {
+        m_restDuration = 8;
+    }
 }
-
-std::string Camel::getName() const { return "Верблюд"; }

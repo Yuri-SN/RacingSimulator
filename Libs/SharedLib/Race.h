@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IVehicle.h"
+#include "Vehicle.h"
 #include "RaceType.h"
 #include "VehicleResult.h"
 
@@ -28,10 +28,10 @@ public:
     std::vector<VehicleResult> calculateResult();
 
 private:
-    bool isVehicleTypeAceptable(IVehicle *);
+    bool isVehicleTypeAceptable(Vehicle *);
 
-    std::vector<IVehicle *> m_availableVehicles{};
-    std::vector<IVehicle *> m_registeredVehicles{};
+    std::vector<Vehicle *> m_availableVehicles{};
+    std::vector<Vehicle *> m_registeredVehicles{};
 
     RaceType m_raceType{};
     int m_raceDistance{};

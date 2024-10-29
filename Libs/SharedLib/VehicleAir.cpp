@@ -1,15 +1,14 @@
 #include "VehicleAir.h"
 
-VehicleAir::VehicleAir(double speed) : m_speed{speed} {}
+VehicleAir::VehicleAir(const std::string &name, double speed,
+                       double reductionFactor)
+    : m_speed{speed}, m_distanceReductionFactor{reductionFactor} {
 
-double VehicleAir::calculateDistance(double distance) const {
-    if (distance < 1000) return distance;
-    if (distance < 5000) return distance * 0.97;
-    if (distance < 10000) return distance * 0.90;
-
-    return distance * 0.95;
+    m_name = name;
 }
 
-bool VehicleAir::isTypeAir() const {
-    return true;
-}
+double VehicleAir::getSpeed() const { return m_speed; }
+
+double VehicleAir::getDistanceReductionFactor(int raceDistance) const { return m_distanceReductionFactor; }
+
+bool VehicleAir::isTypeAir() const { return true; }
