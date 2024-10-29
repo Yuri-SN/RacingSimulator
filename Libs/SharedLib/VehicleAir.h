@@ -5,16 +5,11 @@
 class VehicleAir : public Vehicle {
 
 public:
-    VehicleAir(const std::string &name, double speed, double reductionFactor);
-
-    virtual double getSpeed() const override;
-    virtual double getDistanceReductionFactor(int raceDistance) const;
+    VehicleAir(const std::string &name, int speed);
 
     bool isTypeAir() const override;
 
 protected:
+    int m_speed{};
     double m_distanceReductionFactor{};
-
-private:
-    double m_speed{};
 };

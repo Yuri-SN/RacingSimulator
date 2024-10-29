@@ -1,16 +1,25 @@
 #include "FlyingCarpet.h"
 
-FlyingCarpet::FlyingCarpet()
-    : VehicleAir("Ковёр-самолёт", 10, 0) {}
+FlyingCarpet::FlyingCarpet() : VehicleAir("Ковёр-самолёт", 10) {}
 
-double FlyingCarpet::getDistanceReductionFactor(int raceDistance) const {
-    if (raceDistance < 1000) {
-        return 0;  // Без сокращения
-    } else if (raceDistance < 5000) {
-        return 0.03;  // Сокращение на 3%
-    } else if (raceDistance < 10000) {
-        return 0.10;  // Сокращение на 10%
+double FlyingCarpet::calculateTotalTime(int distance) {
+    // Расчёт уменьшения расстояния
+    double reductionFactor = 0.0;
+    if (distance < 1000) {
+        reductionFactor = 0.0;
+    } else if (distance < 5000) {
+        reductionFactor = 0.03;
+    } else if (distance < 10000) {
+        reductionFactor = 0.10;
     } else {
-        return 0.05;  // Если расстояние больше или равно 10000 км, сокращение на 5%
+        reductionFactor = 0.05;
     }
+
+    // Расчёт уменьшенного расстояния
+    double effectiveDistance = distance * (1 - reductionFactor);
+
+    // Общее время прохождения гонки
+    double totalTime = effectiveDistance / m_speed;
+
+    return totalTime;
 }

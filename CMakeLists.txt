@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(SharedDynamicLib SHARED
     Libs/SharedLib/Vehicle.h
+    Libs/SharedLib/Vehicle.cpp
     Libs/SharedLib/VehicleResult.h
     Libs/SharedLib/VehicleGround.h
     Libs/SharedLib/VehicleGround.cpp
@@ -24,8 +25,8 @@ add_library(SharedDynamicLib SHARED
     Libs/SharedLib/Air/FlyingCarpet.cpp
     Libs/SharedLib/Air/Eagle.h
     Libs/SharedLib/Air/Eagle.cpp
-    Libs/SharedLib/Air/Broom.h
-    Libs/SharedLib/Air/Broom.cpp
+    Libs/SharedLib/Air/Broomstick.h
+    Libs/SharedLib/Air/Broomstick.cpp
     Libs/SharedLib/Race.h
     Libs/SharedLib/Race.cpp
     Libs/SharedLib/RaceType.h

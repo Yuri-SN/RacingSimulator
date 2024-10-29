@@ -6,10 +6,11 @@ class Vehicle {
 public:
     virtual ~Vehicle() {}
 
-    virtual double getSpeed() const = 0;
+    virtual double calculateTotalTime(int distance) = 0;
+
     virtual bool isTypeAir() const = 0;
 
-    std::string getName() const { return m_name; }
+    std::string getName() const;
 
 protected:
     std::string m_name{};

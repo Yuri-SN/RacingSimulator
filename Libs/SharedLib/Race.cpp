@@ -1,5 +1,5 @@
 #include "Race.h"
-#include "Air/Broom.h"
+#include "Air/Broomstick.h"
 #include "Air/Eagle.h"
 #include "Air/FlyingCarpet.h"
 #include "Ground/AllTerrainBoots.h"
@@ -10,7 +10,7 @@
 
 Race::Race() {
     m_availableVehicles.push_back(new AllTerrainBoots());
-    m_availableVehicles.push_back(new Broom());
+    m_availableVehicles.push_back(new Broomstick());
     m_availableVehicles.push_back(new Camel());
     m_availableVehicles.push_back(new Centaur());
     m_availableVehicles.push_back(new Eagle());
@@ -132,24 +132,7 @@ std::vector<VehicleResult> Race::calculateResult() {
     std::vector<VehicleResult> results{};
 
     for (auto *vehicle : m_registeredVehicles) {
-        if (vehicle->isTypeAir()) {
-            // Расчёт времени для воздушного ТС
-            auto airVehicle = dynamic_cast<VehicleAir *>(vehicle);
-            double reducedDistance =
-                m_raceDistance * (1 - airVehicle->getDistanceReductionFactor(m_raceDistance));
-            double totalTime = reducedDistance / airVehicle->getSpeed();
-            results.push_back({airVehicle->getName(), totalTime});
-        } else {
-            // Расчёт времени для наземного ТС
-            auto groundVehicle = dynamic_cast<VehicleGround *>(vehicle);
-            double totalTime = m_raceDistance / groundVehicle->getSpeed();
-            int breaks =
-                static_cast<int>(totalTime / groundVehicle->getMovementTime());
-            for (int i{0}; i < breaks; ++i) {
-                totalTime += groundVehicle->getRestDuration();
-            }
-            results.push_back({groundVehicle->getName(), totalTime});
-        }
+        results.push_back({vehicle->getName(), vehicle->calculateTotalTime(m_raceDistance)});
     }
 
     std::sort(results.begin(), results.end(),

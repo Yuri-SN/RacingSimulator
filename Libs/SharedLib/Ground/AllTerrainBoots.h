@@ -6,5 +6,5 @@ class AllTerrainBoots : public VehicleGround {
 public:
     AllTerrainBoots();
 
-    void setRestDuration(int stopNumber) override;
+    double calculateTotalTime(int distance) override;
 };

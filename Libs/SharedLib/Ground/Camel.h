@@ -6,5 +6,5 @@ class Camel : public VehicleGround {
 public:
     Camel();
 
-    void setRestDuration(int stopNumber) override;
+    double calculateTotalTime(int distance) override;
 };

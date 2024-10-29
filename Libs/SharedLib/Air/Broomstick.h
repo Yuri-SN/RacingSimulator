@@ -2,9 +2,9 @@
 
 #include "../VehicleAir.h"
 
-class FlyingCarpet : public VehicleAir {
+class Broomstick : public VehicleAir {
 public:
-    FlyingCarpet();
+    Broomstick();
 
     virtual double calculateTotalTime(int distance) override;
 };

@@ -27,6 +27,8 @@ int main() {
     std::cout << "Добро пожаловать в гоночный симулятор!" << std::endl;
 
     do {
+        raceRegistrationComplete = false;
+
         race->clean();
 
         std::cout << "1. Гонка для наземного транспорта" << std::endl;
@@ -136,6 +138,7 @@ int main() {
         do {
             std::cout << "1. Провести ещё одну гонку" << std::endl;
             std::cout << "2. Выйти" << std::endl;
+            std::cout << "Выберите действие: ";
             std::cin >> anotherRaceMenuitem;
 
             anotherRaceMenuitemCorrect =

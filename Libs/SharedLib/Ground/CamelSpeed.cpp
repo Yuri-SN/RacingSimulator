@@ -1,13 +1,28 @@
 #include "CamelSpeed.h"
 
-CamelSpeed::CamelSpeed() : VehicleGround("Верблюд-быстроход", 40, 10, 5) {}
+CamelSpeed::CamelSpeed() : VehicleGround("Верблюд-быстроход", 40, 10) {}
 
-void CamelSpeed::setRestDuration(int stopNumber) {
-    if (stopNumber == 1) {
-        m_restDuration = 5;      // Первое время отдыха
-    } else if (stopNumber == 2) {
-        m_restDuration = 6.5;    // Второе время отдыха
-    } else {
-        m_restDuration = 8;      // Все последующие остановки
+double CamelSpeed::calculateTotalTime(int distance) {
+    const int firstRestDuration = 5;       // Длительность первого отдыха (ч)
+    const double secondRestDuration = 6.5; // Длительность второго отдыха (ч)
+    const int subsequentRestDuration = 8;  // Длительность остальных отдыхов (ч)
+
+    // Общее время движения без учета отдыха
+    double totalTime = distance / m_speed;
+
+    // Количество перерывов
+    int breaks = static_cast<int>(totalTime / m_movementTime);
+
+    // Добавление времени отдыха
+    for (int i = 0; i < breaks; ++i) {
+        if (i == 0) {
+            totalTime += firstRestDuration;
+        } else if (i == 1) {
+            totalTime += secondRestDuration;
+        } else {
+            totalTime += subsequentRestDuration;
+        }
     }
+
+    return totalTime;
 }
